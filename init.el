@@ -478,47 +478,14 @@ It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
 
 ;;(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS2.3")
-(setq configuration-layer-elpa-archives
-      '(("melpa-cn" . "http://elpa.zilongshanren.com/melpa/")
-        ("org-cn" . "http://elpa.zilongshanren.com/org/")
-        ("gnu-cn" . "http://elpa.zilongshanren.com/gnu/")))
+  (setq configuration-layer-elpa-archives
+        '(("melpa-cn" . "http://elpa.zilongshanren.com/melpa/")
+          ("org-cn" . "http://elpa.zilongshanren.com/org/")
+          ("gnu-cn" . "http://elpa.zilongshanren.com/gnu/")))
 
-
-;;(setq configuration-layer-elpa-archives
-;;      '(("melpa-cn" . "https://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
-;;       ("org-cn" . "https://mirrors.tuna.tsinghua.edu.cn/elpa/org/")
-;;        ("gnu-cn" . "https://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")))
-
-(setq tramp-ssh-controlmaster-options
-      "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no")
-
-
-(add-hook 'c++-mode-hook 'shayne_c)
-(add-hook 'c-mode-hook 'shayne_c)
-(add-hook 'helm-after-persistent-action-hook 'which-func-update)
-(add-hook 'c++-mode-hook #'modern-c++-font-lock-mode)
-
-;;hightlight called function
-(font-lock-add-keywords
- 'c-mode
- '(
-   ("\\<\\(for\\|while\\|do\\|if\\|else\\|return\\|continue\\|break\\|switch\\|case\\|default\\)\\>"
-    . font-lock-keyword-face)
-   ("\\<\\(\\sw+\\) ?(" 1 'font-lock-function-name-face)
-   )
- )
-(font-lock-add-keywords
- 'c++-mode
- '(
-   ("\\<\\(for\\|while\\|do\\|if\\|else\\|return\\|continue\\|break\\|switch\\|case\\|default\\)\\>"
-    . font-lock-keyword-face)
-   ("\\<\\(\\sw+\\) ?(" 1 'font-lock-function-name-face)
-   )
- )
-
-(add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
-
-)
+  (setq tramp-ssh-controlmaster-options
+        "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no")
+  )
 
 (defun dotspacemacs/user-load ()
   "Library to load while dumping.

@@ -57,27 +57,6 @@
   (define-key c-mode-base-map (kbd "M-/") 'helm-gtags-resume)
   (define-key c-mode-base-map (kbd "M-i") 'helm-semantic-or-imenu)
   (define-key c-mode-base-map (kbd "C-c l") 'bhj-isearch-from-bod)
-
   (add-hook 'helm-after-persistent-action-hook 'which-func-update);;only enable in c/c++-mode
-
-  ;;hightlight called function
-  (font-lock-add-keywords
-   'c-mode
-   '(
-     ("\\<\\(for\\|while\\|do\\|if\\|else\\|return\\|continue\\|break\\|switch\\|case\\|default\\)\\>"
-      . font-lock-keyword-face)
-     ("\\<\\(\\sw+\\) ?(" 1 'font-lock-function-name-face)
-     )
-   )
-  (font-lock-add-keywords
-   'c++-mode
-   '(
-     ("\\<\\(for\\|while\\|do\\|if\\|else\\|return\\|continue\\|break\\|switch\\|case\\|default\\)\\>"
-      . font-lock-keyword-face)
-     ("\\<\\(\\sw+\\) ?(" 1 'font-lock-function-name-face)
-     )
-   )
-
-
   )
 
