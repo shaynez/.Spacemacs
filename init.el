@@ -595,7 +595,7 @@ Put your configuration code here, except for variables that should be set
 before packages are loaded."
 
   
-  (spacemacs/toggle-automatic-symbol-highlight-on)
+ ;; (spacemacs/toggle-automatic-symbol-highlight-on)
   (spacemacs/toggle-highlight-current-line-globally-off)
   (spacemacs/set-leader-keys-for-major-mode 'c++-mode
     "ge" 'helm-gtags-find-pattern)
@@ -638,7 +638,6 @@ before packages are loaded."
   (define-key isearch-mode-map (kbd "M-i") 'helm-swoop-from-isearch)
 
   ;;(set-face-attribute 'which-func nil :background "Blue1")
-  ;;浠庝换浣曚綅缃烦杞埌鏂拌
   (global-set-key (kbd "C-o")   'vi-open-next-line)
   (defun vi-open-next-line (arg)
     "Move to the next line (like vi) and then opens a line."
@@ -648,14 +647,13 @@ before packages are loaded."
     (next-line 1)
     (indent-according-to-mode))
 
-  ;;鏄剧ず鏂囦欢璺緞
+ 
   (defun show-file-name ()
     "Show the full path file name in the minibuffer."
     (interactive)
     (message (buffer-file-name)))
   ;;(global-set-key [C-f1] 'show-file-name)
   (global-set-key (kbd "M-g f") 'show-file-name)
-  ;;娉ㄩ噴
   (global-set-key (kbd "C-c C-c") 'comment-or-uncomment-region)
 
   ;;(setq ccls-cache-dir (file-truename "/home/shaynez/.cclstmp"))
