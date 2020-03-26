@@ -485,6 +485,9 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
 
   (setq tramp-ssh-controlmaster-options
         "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no")
+
+  (setq-default git-magit-status-fullscreen t)
+
   )
 
 (defun dotspacemacs/user-load ()
@@ -501,32 +504,28 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
+  (spacemacs/toggle-golden-ratio-on)
   (spacemacs/toggle-highlight-current-line-globally-off)
   (spacemacs/set-leader-keys-for-major-mode 'c++-mode
     "ge" 'helm-gtags-find-pattern)
   (spacemacs/set-leader-keys-for-major-mode 'c-mode
     "ge" 'helm-gtags-find-pattern)
 
-  (recentf-mode -1)
-  (delete-selection-mode t)
-  (setq make-backup-files nil)
-  (hungry-delete-mode t)
-  (xterm-mouse-mode -1)
-  (global-auto-complete-mode)
-
-  (global-set-key (kbd "C-x C-b") 'ibuffer)
-
   (setq auto-revert-check-vc-info t)
   (setq auto-revert-interval 10)
-
   (setq helm-echo-input-in-header-line nil)
-  (define-key isearch-mode-map (kbd "M-i") 'helm-swoop-from-isearch)
+  (setq make-backup-files nil)
 
+  (recentf-mode -1)
+  (delete-selection-mode t)
+  (hungry-delete-mode t)
+  (xterm-mouse-mode -1)
+
+  (global-set-key (kbd "C-x C-b") 'ibuffer)
+  (define-key isearch-mode-map (kbd "M-i") 'helm-swoop-from-isearch)
   (with-eval-after-load 'helm-files
     (define-key helm-map (kbd "<tab>") nil)
     (define-key helm-map (kbd "TAB") nil))
-
-  (spacemacs/toggle-golden-ratio-on)
 
   )
 
