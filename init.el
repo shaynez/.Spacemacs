@@ -594,6 +594,8 @@ configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
 
+  
+  (spacemacs/toggle-automatic-symbol-highlight-on)
   (spacemacs/toggle-highlight-current-line-globally-off)
   (spacemacs/set-leader-keys-for-major-mode 'c++-mode
     "ge" 'helm-gtags-find-pattern)
