@@ -28,7 +28,7 @@ This function should only modify configuration layer settings."
 
    ;; List of additional paths where to look for configuration layers.
    ;; Paths must have a trailing slash (i.e. `~/.mycontribs/')
-   dotspacemacs-configuration-layer-path '()
+   dotspacemacs-configuration-layer-path '("~/.spacemacs.d/layer/")
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
@@ -76,7 +76,8 @@ This function should only modify configuration layer settings."
             auto-completion-enable-sort-by-usage t
             auto-completion-enable-snippets-in-popup t
             )
-
+     shayne_c-c++
+     shayne_misc
      )
 
    ;; List of additional packages that will be installed without being
@@ -519,66 +520,6 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
 
 )
 
-;; This is a function copied from stackoverflow to facify #if 0/#else/#endif keywords.
-;; The comments are added by myself to make it understandable.
-(defun my-c-mode-font-lock-if0 (limit)
-  (save-restriction
-    (widen)
-    (save-excursion
-      (goto-char (point-min))
-      (let ((depth 0) str start start-depth)
-        ;; Search #if/#else/#endif using regular expression.
-        (while (re-search-forward "^\\s-*#\\s-*\\(if\\|else\\|endif\\)" limit 'move)
-          (setq str (match-string 1))
-          ;; Handle #if.
-          (if (string= str "if")
-              (progn
-                (setq depth (1+ depth))
-                ;; Handle neariest 0.
-                (when (and (null start) (looking-at "\\s-+0"))
-                  (setq start (match-end 0)
-                        start-depth depth)))
-            ;; Handle #else, here we can decorate #if 0->#else block using 'font-lock-comment-face'.
-            (when (and start (= depth start-depth))
-              (c-put-font-lock-face start (match-beginning 0) 'font-lock-comment-face)
-              (setq start nil))
-            ;; Handle #endif, return to upper block if possible.
-            (when (string= str "endif")
-              (setq depth (1- depth)))))
-        ;; Corner case when there are only #if 0 (May be you are coding now:))
-        (when (and start (> depth 0))
-          (c-put-font-lock-face start (point) 'font-lock-comment-face)))))
-  nil)
-
-(defun my-c-mode-common-hook ()
-  (font-lock-add-keywords
-   nil
-   '((my-c-mode-font-lock-if0 (0 font-lock-comment-face prepend))) 'add-to-end))
-
-
-(defun shayne_c ()
-  ;;(interactive)
-  ;;(helm-gtags-mode t)
-  (which-function-mode t)
-  ;;(read-only-mode t)
-  ;; (define-key c++-mode-map (kbd "M-/") 'helm-gtags-resume)
-  ;; (define-key c++-mode-map (kbd "M-i") 'helm-semantic-or-imenu)
-  ;; (define-key c-mode-map (kbd "M-/") 'helm-gtags-resume)
-  ;; (define-key c-mode-map (kbd "M-i") 'helm-semantic-or-imenu)
-  (define-key c-mode-base-map (kbd "M-/") 'helm-gtags-resume)
-  (define-key c-mode-base-map (kbd "M-i") 'helm-semantic-or-imenu)
-
-  (defun bhj-isearch-from-bod (&optional col-indent)
-    (interactive "p")
-    (let ((word (current-word)))
-      (ska-point-to-register)
-      (beginning-of-defun)
-      (setq regexp-search-ring (cons (concat "\\b" word "\\b") regexp-search-ring))
-      (search-forward-regexp (concat "\\b" word "\\b"))))
-  (define-key c-mode-base-map (kbd "C-c l") 'bhj-isearch-from-bod)
-
-  )
-
 (defun dotspacemacs/user-load ()
   "Library to load while dumping.
 This function is called only while dumping Spacemacs configuration. You can
@@ -593,34 +534,11 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
-
-  ;;test
- ;; (spacemacs/toggle-automatic-symbol-highlight-on)
   (spacemacs/toggle-highlight-current-line-globally-off)
   (spacemacs/set-leader-keys-for-major-mode 'c++-mode
     "ge" 'helm-gtags-find-pattern)
   (spacemacs/set-leader-keys-for-major-mode 'c-mode
     "ge" 'helm-gtags-find-pattern)
-
-
- (defun company-yasnippet/disable-after-dot (fun command &optional arg &rest _ignore)
-    (if (eq command 'prefix)
-        (let ((prefix (funcall fun 'prefix)))
-            (when (and prefix (not
-                            (eq
-                                (char-before (- (point) (length prefix)))
-                                ?.)))
-            prefix))
-        (funcall fun command arg)))
-
-  (advice-add #'company-yasnippet :around #'company-yasnippet/disable-after-dot)
-
-
-  ;;(global-highlight-thing-mode t)
-  ;;(setq highlight-thing-what-thing 'symbol)
-  ;;(setq highlight-thing-delay-seconds 3)
-  ;;(setq highlight-thing-limit-to-defun t)
-  ;;(setq highlight-thing-case-sensitive-p t)
 
   (recentf-mode -1)
   (delete-selection-mode t)
@@ -637,24 +555,6 @@ before packages are loaded."
   (setq helm-echo-input-in-header-line nil)
   (define-key isearch-mode-map (kbd "M-i") 'helm-swoop-from-isearch)
 
-  ;;(set-face-attribute 'which-func nil :background "Blue1")
-  (global-set-key (kbd "C-o")   'vi-open-next-line)
-  (defun vi-open-next-line (arg)
-    "Move to the next line (like vi) and then opens a line."
-    (interactive "p")
-    (end-of-line)
-    (open-line arg)
-    (next-line 1)
-    (indent-according-to-mode))
-
- 
-  (defun show-file-name ()
-    "Show the full path file name in the minibuffer."
-    (interactive)
-    (message (buffer-file-name)))
-  ;;(global-set-key [C-f1] 'show-file-name)
-  (global-set-key (kbd "M-g f") 'show-file-name)
-  (global-set-key (kbd "C-c C-c") 'comment-or-uncomment-region)
 
   ;;(setq ccls-cache-dir (file-truename "/home/shaynez/.cclstmp"))
   (with-eval-after-load 'helm-files
@@ -664,25 +564,14 @@ before packages are loaded."
   (global-set-key (kbd "M-g h") 'highlight-frame-toggle)
   (global-set-key (kbd "M-g u") 'clear-highlight-frame)
 
-  (global-set-key (kbd "C-c w") 'ska-point-to-register)
-  (global-set-key (kbd "C-c j") 'ska-jump-to-register)
-  (defun ska-point-to-register()
-    "Store cursorposition _fast_ in a register.
-Use ska-jump-to-register to jump back to the stored
-position."
-    (interactive)
-    (setq zmacs-region-stays t)
-    (point-to-register 8))
-  (defun ska-jump-to-register()
-    "Switches between current cursorposition and position
-that was stored with ska-point-to-register."
-    (interactive)
-    (setq zmacs-region-stays t)
-    (let ((tmp (point-marker)))
-      (jump-to-register 8)
-      (set-register 8 tmp)))
+  
 
-  ;;(define-key treemacs-mode-map [mouse-1] #'treemacs-single-click-expand-action)
+
+
+
+
+
+
 
 
   )
