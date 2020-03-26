@@ -522,24 +522,11 @@ before packages are loaded."
   (setq helm-echo-input-in-header-line nil)
   (define-key isearch-mode-map (kbd "M-i") 'helm-swoop-from-isearch)
 
-
-  ;;(setq ccls-cache-dir (file-truename "/home/shaynez/.cclstmp"))
   (with-eval-after-load 'helm-files
     (define-key helm-map (kbd "<tab>") nil)
     (define-key helm-map (kbd "TAB") nil))
 
-  (global-set-key (kbd "M-g h") 'highlight-frame-toggle)
-  (global-set-key (kbd "M-g u") 'clear-highlight-frame)
-
-  
-
-
-
-
-
-
-
-
+  (spacemacs/toggle-golden-ratio-on)
 
   )
 
