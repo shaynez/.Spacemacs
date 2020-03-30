@@ -58,5 +58,7 @@
   (define-key c-mode-base-map (kbd "M-i") 'helm-semantic-or-imenu)
   (define-key c-mode-base-map (kbd "C-c l") 'bhj-isearch-from-bod)
   (add-hook 'helm-after-persistent-action-hook 'which-func-update);;only enable in c/c++-mode
+  
+  (setq c-basic-offset 4)
   )
 
