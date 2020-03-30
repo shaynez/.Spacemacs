@@ -54,7 +54,7 @@ This function should only modify configuration layer settings."
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
      ;; spell-checking
-     ;; syntax-checking
+     ;;syntax-checking
      treemacs
      ;; version-control
 
@@ -64,18 +64,22 @@ This function should only modify configuration layer settings."
                   c-c++-enable-clang-support t)
 
      (gtags :variables
+            gtags-enable-by-default t
             helm-gtags-ignore-case nil
             helm-gtags-auto-update t
             helm-gtags-pulse-at-cursor nil
             helm-gtags-suggested-key-mapping t
             helm-gtags-display-style nil
             helm-gtags-fuzzy-match t
-            helm-gtags-maximum-candidates 150
+            helm-gtags-maximum-candidates 500
             )
      (auto-completion :variables
             auto-completion-enable-sort-by-usage t
             auto-completion-enable-snippets-in-popup t
             )
+
+     semantic
+
      shayne_c-c++
      shayne_misc
      )
@@ -516,10 +520,12 @@ before packages are loaded."
   (setq helm-echo-input-in-header-line nil)
   (setq make-backup-files nil)
 
+  (semantic-mode 1)
   (recentf-mode -1)
   (delete-selection-mode t)
   (hungry-delete-mode t)
   (xterm-mouse-mode -1)
+  (global-semantic-idle-summary-mode -1) 
 
   (global-set-key (kbd "C-x C-b") 'ibuffer)
   (define-key isearch-mode-map (kbd "M-i") 'helm-swoop-from-isearch)
