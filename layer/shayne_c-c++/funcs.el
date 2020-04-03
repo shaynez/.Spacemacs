@@ -49,6 +49,7 @@
   ;;(interactive)
   ;;(helm-gtags-mode t)
   (which-function-mode t)
+  (read-only-mode t)
   ;;(read-only-mode t)
   ;; (define-key c++-mode-map (kbd "M-/") 'helm-gtags-resume)
   ;; (define-key c++-mode-map (kbd "M-i") 'helm-semantic-or-imenu)
