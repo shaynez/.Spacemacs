@@ -1,7 +1,4 @@
-
-
 (advice-add #'company-yasnippet :around #'company-yasnippet/disable-after-dot)
-
 
 (global-set-key (kbd "C-o") 'vi-open-next-line)
 

@@ -1,4 +1,3 @@
-
 (defun company-yasnippet/disable-after-dot (fun command &optional arg &rest _ignore)
   (if (eq command 'prefix)
       (let ((prefix (funcall fun 'prefix)))
@@ -8,7 +7,6 @@
                             ?.)))
           prefix))
     (funcall fun command arg)))
-
 
 ;;(global-highlight-thing-mode t)
 ;;(setq highlight-thing-what-thing 'symbol)
