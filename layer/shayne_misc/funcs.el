@@ -44,4 +44,3 @@ that was stored with ska-point-to-register."
     (jump-to-register 8)
     (set-register 8 tmp)))
 
-;;(define-key treemacs-mode-map [mouse-1] #'treemacs-single-click-expand-action)
