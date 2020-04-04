@@ -520,6 +520,7 @@ before packages are loaded."
   (setq helm-echo-input-in-header-line nil)
   (setq make-backup-files nil)
 
+  ;;mode setting
   (semantic-mode 1)
   (recentf-mode -1)
   (delete-selection-mode t)
@@ -527,6 +528,7 @@ before packages are loaded."
   (xterm-mouse-mode -1)
   (global-semantic-idle-summary-mode -1) 
 
+  ;;key-map setting
   (global-set-key (kbd "C-x C-b") 'ibuffer)
   (define-key isearch-mode-map (kbd "M-i") 'helm-swoop-from-isearch)
   (with-eval-after-load 'helm-files
